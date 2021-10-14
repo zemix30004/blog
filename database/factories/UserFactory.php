@@ -3,8 +3,10 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Illuminate\Support\Hash;
 
 class UserFactory extends Factory
 {
@@ -13,6 +15,7 @@ class UserFactory extends Factory
      *
      * @var string
      */
+
     protected $model = User::class;
 
     /**
@@ -45,3 +48,12 @@ class UserFactory extends Factory
         });
     }
 }
+$factory->define(User::class, function (Faker $faker) {
+    return [
+        'name' => $faker->name,
+        'email' => $faker->unique()->safeEmail,
+        'password' => Hash::make('qwerty'),
+        'email_verified_at' => now(),
+        'remember_token' => Str::random(10),
+    ];
+});

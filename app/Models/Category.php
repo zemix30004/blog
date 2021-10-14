@@ -9,5 +9,5 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $model = \App\Models\Category::class;
+    protected $model = Category::class;
 }
