@@ -15,10 +15,10 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('post_id')->nullable(false);
+            $table->unsignedBigInteger('post_id')->default();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('published_by')->nullable();
-            $table->string('content', 500)->nullable(false);
+            $table->string('content', 500)->default();
             $table->timestamps();
 
             // внешний ключ, ссылается на поле id таблицы posts

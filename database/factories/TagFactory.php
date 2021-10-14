@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Tag;
 use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class TagFactory extends Factory
 {
@@ -27,11 +28,13 @@ class TagFactory extends Factory
             //
         ];
     }
+
+    public function run(Faker $faker)
+    {
+        $name = $faker->realText(rand(20, 30));
+        return [
+            'name' => $name,
+            'slug' => Str::slug($name),
+        ];
+    }
 }
-$factory->define(Tag::class, function (Faker $faker) {
-    $name = $faker->realText(rand(20, 30));
-    return [
-        'name' => $name,
-        'slug' => Str::slug($name),
-    ];
-});

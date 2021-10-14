@@ -18,17 +18,17 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('published_by')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
-            $table->string('name', 100);
-            $table->string('slug', 100)->unique();
+            $table->string('name', 100)->default();
+            $table->string('slug', 100)->default();
             $table->string('image', 50)->nullable();
-            $table->string('excerpt', 500)->nullable(false);
-            $table->text('content')->nullable(false);
+            $table->string('excerpt', 500)->default();
+            $table->text('content')->default();
             $table->timestamps();
 
             // внешний ключ, ссылается на поле id таблицы users
             $table->foreign('user_id')
                 ->references('id')
-                ->on('brands')
+                ->on('users')
                 ->nullOnDelete();
             // внешний ключ, ссылается на поле id таблицы users
             $table->foreign('published_by')

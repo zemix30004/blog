@@ -28,12 +28,14 @@ class CategoryFactory extends Factory
             //
         ];
     }
+
+    public function run(Faker $faker)
+    {
+        $name = $faker->realText(rand(40, 50));
+        return [
+            'name' => $name,
+            'content' => $faker->realText(rand(200, 500)),
+            'slug' => Str::slug($name),
+        ];
+    }
 }
-$factory->define(Category::class, function (Faker $faker) {
-    $name = $faker->realText(rand(40, 50));
-    return [
-        'name' => $name,
-        'content' => $faker->realText(rand(200, 500)),
-        'slug' => Str::slug($name),
-    ];
-});
