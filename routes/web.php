@@ -14,12 +14,27 @@ use App\Http\Controllers\PostController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-Route::get('/', [PostController::class, 'index'])->name('posts.index');
-Route::get('post/index', [PostController::class, 'index'])->name('post.index');
-Route::get('post/search', [PostController::class, 'search'])->name('post.search');
+Route::get('/', function () {
+    return view('posts');
+});
+
+Route::get('posts/{post}', function ($slug) {
+    $path = __DIR__ . "/../resources/posts/{$slug}.html";
+
+    if (!file_exists($path)) {
+        return redirect('/');
+
+        abort(404);
+    }
+    $post = file_get_contents($path);
+
+    return view('post', [
+        'post' => $post
+    ]);
+});
+// Route::get('/', [PostController::class, 'index'])->name('posts.index');
+// Route::get('post/index', [PostController::class, 'index'])->name('post.index');
+// Route::get('post/search', [PostController::class, 'search'])->name('post.search');
 // Route::get('/', 'App\Http\Controllers\PostController@index');
 
 
