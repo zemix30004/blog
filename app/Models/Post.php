@@ -10,7 +10,9 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 class Post extends Model
 {
-    // use HasFactory;
+    use HasFactory;
+
+    // protected $fillable = ['title', 'excerpt', 'body', 'id'];
 
     public $title;
 
@@ -62,18 +64,27 @@ class Post extends Model
 
     public static function find($slug)
     {
-
-        $posts = static::all();
-
-        $posts->firstWhere('slug', $slug);
-
-
-        //     if (!file_exists($path = resource_path("posts/{$slug}.html"))) {
-        //         throw new ModelNotFoundException();
-        //     }
-
-        //     return cache()->remember("posts.{$slug}", 7, function () use ($path) {
-        //         return file_get_contents($path));
-        // }
+        return static::all()->firstWhere('slug', $slug);
     }
+
+    public static function findOrFail($slug)
+    {
+
+        $post = static::find($slug);
+
+        if (!$post) {
+            throw new ModelNotFoundException();
+        }
+
+        return $post;
+    }
+
+    //     if (!file_exists($path = resource_path("posts/{$slug}.html"))) {
+    //         throw new ModelNotFoundException();
+    //     }
+
+    //     return cache()->remember("posts.{$slug}", 7, function () use ($path) {
+    //         return file_get_contents($path));
+    // }
+
 }

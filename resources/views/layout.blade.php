@@ -9,9 +9,6 @@
     <title>My blog</title>
 </head>
 <body>
-    <header>
-        @yield('banner')
-    </header>
-  @yield('content')
+    @yield('banner')
 </body>
 </html>
