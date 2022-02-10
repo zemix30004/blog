@@ -31,15 +31,13 @@ class PostFactory extends Factory
 
     public function run(Faker $faker)
     {
-        $name = $faker->realText(rand(70, 100));
         return [
-            'user_id' => rand(1, 10),
-            'category_id' => rand(1, 12),
-            'name' => $name,
-            'excerpt' => $faker->realText(rand(300, 400)),
-            'content' => $faker->realText(rand(400, 500)),
-            'slug' => Str::slug($name),
-            'published_by' => rand(1, 10),
+            'author_id' => rand(1, 4),
+            'title' => $faker->realText(rand(25, 30)),
+            'excerpt' => $faker->realText(rand(100, 120)),
+            'body' => $faker->realText(rand(200, 300)),
+            'created_at' => $faker->dateTimeBetween('-60 days', '-30 days'),
+            'updated_at' => $faker->dateTimeBetween('-20 days', '-1 days'),
         ];
     }
 }
