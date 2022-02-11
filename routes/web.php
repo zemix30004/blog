@@ -18,4 +18,10 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', [PostController::class, 'index']);
+// Route::resource('posts', PostController::class);
+Route::get('/', [PostController::class, 'index'])->name('blog.index');
+
+Route::get('post/index', [PostController::class, 'index'])->name('post.index');
+Route::get('post/create', [PostController::class, 'create'])->name('post.create');
+Route::post('post/store', [PostController::class, 'store'])->name('post.store');
+Route::get('post/search', [PostController::class, 'search'])->name('post.search');
